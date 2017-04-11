@@ -36,7 +36,7 @@ enum ErrorCode : Int {
     case CannotSaveAttachment
 }
 
-let ErrorDomain = "IdeasErrorDoman"
+let ErrorDomain = "IdeasErrorDomain"
 
 
 func err(_ code: ErrorCode, _ userInfo:[NSObject:Any]? = nil)
@@ -49,6 +49,24 @@ class Document: NSDocument {
 
     // Main text content
     var text : NSAttributedString = NSAttributedString()
+    
+    var documentFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
+    
+    override func fileWrapper(ofType typeName: String) throws -> FileWrapper {
+        
+        let textRTFData = try self.text.data(from: NSRange(0..<self.text.length), documentAttributes: [NSDocumentTypeDocumentAttribute : NSRTFTextDocumentType])
+        
+        //If the current document file wrapper already contains a  text file, remove it and replace with new one
+        if let oldTextFileWrapper = self.documentFileWrapper.fileWrappers?[IdeaDocumentFileNames.TextFile.rawValue] {
+            self.documentFileWrapper.removeFileWrapper(oldTextFileWrapper)
+        }
+        
+        //Save the text data into the file
+        self.documentFileWrapper.addRegularFile(withContents: textRTFData, preferredFilename: IdeaDocumentFileNames.TextFile.rawValue)
+        
+        //return the main documents file wrapper - what is saved on disk
+        return self.documentFileWrapper
+    }
     
     override init() {
         super.init()
