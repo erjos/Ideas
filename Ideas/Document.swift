@@ -8,8 +8,48 @@
 
 import Cocoa
 
+//Names of files and directories in the package
+enum IdeaDocumentFileNames : String {
+    case TextFile = "Text.rtf"
+    
+    case AttachmentsDirectory = "Attachments"
+    
+}
+
+enum ErrorCode : Int {
+    /// Couldn't find document
+    case CannotAccessDocument
+    
+    /// Couldn't access any file wrappers inside this document
+    case CannotLoadFileWrappers
+    
+    /// Couldn't load the Text.rtf file
+    case CannotLoadText
+    
+    /// Couldn't Access the Attachments folder
+    case CannotAccessAttachments
+    
+    /// Couldn't save the Text.rtf file
+    case CannotSaaveText
+    
+    /// Couldn't save an attachment
+    case CannotSaveAttachment
+}
+
+let ErrorDomain = "IdeasErrorDoman"
+
+
+func err(_ code: ErrorCode, _ userInfo:[NSObject:Any]? = nil)
+    -> NSError {
+        //Generate an NSError object, using ErrorDomain and whatever value we were passed
+        return NSError(domain: ErrorDomain, code : code.rawValue, userInfo: userInfo)
+}
+
 class Document: NSDocument {
 
+    // Main text content
+    var text : NSAttributedString = NSAttributedString()
+    
     override init() {
         super.init()
         // Add your subclass-specific initialization here.
