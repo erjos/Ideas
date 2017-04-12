@@ -94,6 +94,47 @@ class Document: NSDocument {
     
     var documentFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
     
+    private var attachmentsDirectoryWrapper : FileWrapper? {
+        
+        guard let fileWrappers = self.documentFileWrapper.fileWrappers else {
+            NSLog("Attempting to access document's contents, but none found!")
+            return nil
+        }
+        
+        //Represents the attachments folder inside the documents package
+        var attachmentsDirectoryWrapper =
+            fileWrappers[IdeaDocumentFileNames.AttachmentsDirectory.rawValue]
+        
+        if attachmentsDirectoryWrapper == nil {
+            
+            attachmentsDirectoryWrapper =
+                FileWrapper(directoryWithFileWrappers: [:])
+            
+            attachmentsDirectoryWrapper?.preferredFilename = IdeaDocumentFileNames.AttachmentsDirectory.rawValue
+            
+            self.documentFileWrapper.addFileWrapper(attachmentsDirectoryWrapper!)
+        }
+        
+        return attachmentsDirectoryWrapper
+    }
+    
+    //Adds an attachment to the attachment directory
+    func addAttachmentAtURL(url:URL) throws {
+        
+        guard attachmentsDirectoryWrapper != nil else {
+            throw err(.CannotAccessAttachments)
+        }
+        
+        self.willChangeValue(forKey: "attachedFiles")
+        
+        let newAttachment = try FileWrapper(url: url, options: FileWrapper.ReadingOptions.immediate)
+        
+        attachmentsDirectoryWrapper?.addFileWrapper(newAttachment)
+        
+        self.updateChangeCount(.changeDone)
+        self.didChangeValue(forKey: "attachedFiles")
+    }
+    
     //Prepares and returns a new file wrapper to the system, which then saves it to disk
     override func fileWrapper(ofType typeName: String) throws -> FileWrapper {
         
