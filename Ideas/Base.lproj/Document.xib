@@ -8,7 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="Ideas" customModuleProvider="target">
             <connections>
-                <outlet property="attachmentsList" destination="Zq5-1T-82j" id="Lob-4D-hEL"/>
+                <outlet property="attachmentsList" destination="ZW4-Iy-xRE" id="fhc-yD-bw1"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
         </customObject>

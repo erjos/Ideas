@@ -82,17 +82,70 @@ extension FileWrapper {
     }
 }
 
+extension Document : AddAttachmentDelegate {
+    func addFile() {
+        let panel = NSOpenPanel()
+        
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = false
+        panel.canChooseFiles = true
+        
+        panel.begin { (result) -> Void in
+            if result == NSModalResponseOK,
+                let resultURL = panel.urls.first {
+                do {
+                    //We were given a URL - copy it in
+                    try self.addAttachmentAtURL(url: resultURL)
+                    
+                    //Refresh the attachments list
+                    self.attachmentsList?.reloadData();
+                } catch let error as NSError {
+                    
+                    // There was an error adding the attachment.
+                    // Show the user!
+                    
+                    //try to get a window to present a sheet in
+                    if let window = self.windowForSheet {
+                        //Present the error in a sheet
+                        NSApp.presentError(error, modalFor: window, delegate: nil, didPresent: nil, contextInfo: nil)
+                    } else {
+                        //No window, so present it in a dialog box
+                        NSApp.presentError(error)
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
 class Document: NSDocument {
     
-    @IBOutlet weak var attachmentsList: NSScrollView!
+    @IBOutlet var attachmentsList: NSCollectionView!
     
-    @IBAction func addAttachment(_ sender: Any) {
+    @IBAction func addAttachment(_ sender: NSButton) {
+        
+        if let viewController = AddAttachmentViewController(nibName:"AddAttachmentViewController", bundle:Bundle.main){
+            
+            viewController.delegate = self
+            
+            self.popover = NSPopover()
+            
+            self.popover?.behavior = .transient
+            
+            self.popover?.contentViewController = viewController
+            
+            self.popover?.show(relativeTo: sender.bounds
+                , of: sender, preferredEdge: NSRectEdge.maxY)
+        }
     }
     
     // Main text content
     var text : NSAttributedString = NSAttributedString()
     
     var documentFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
+    
+    var popover : NSPopover?
     
     private var attachmentsDirectoryWrapper : FileWrapper? {
         
@@ -133,6 +186,16 @@ class Document: NSDocument {
         
         self.updateChangeCount(.changeDone)
         self.didChangeValue(forKey: "attachedFiles")
+    }
+    
+    //gets the dictionary that maps filenames to file wrappers inside the Attachments directory and returns the list of file wrappers
+    dynamic var attachedFiles : [FileWrapper]? {
+        if let attachmentsFileWrappers = self.attachmentsDirectoryWrapper?.fileWrappers{
+            let attachments = Array(attachmentsFileWrappers.values)
+            return attachments
+        } else {
+            return nil
+        }
     }
     
     //Prepares and returns a new file wrapper to the system, which then saves it to disk
