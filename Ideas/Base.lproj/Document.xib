@@ -28,14 +28,14 @@
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxB-xo-34s">
                         <rect key="frame" x="20" y="149" width="467" height="244"/>
                         <clipView key="contentView" id="CJT-ti-FtT">
-                            <rect key="frame" x="1" y="1" width="465" height="242"/>
+                            <rect key="frame" x="1" y="1" width="450" height="242"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" linkDetection="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="oqx-Qn-74t">
-                                    <rect key="frame" x="0.0" y="0.0" width="465" height="242"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="242"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="465" height="242"/>
+                                    <size key="minSize" width="450" height="242"/>
                                     <size key="maxSize" width="473" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
@@ -50,7 +50,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="wVB-wF-60S">
-                            <rect key="frame" x="450" y="1" width="16" height="242"/>
+                            <rect key="frame" x="451" y="1" width="15" height="242"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -93,6 +93,9 @@
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rnA-c8-nFE">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <connections>
+                                <action selector="addAttachment:" target="-2" id="eZf-as-4In"/>
+                            </connections>
                         </buttonCell>
                     </button>
                 </subviews>

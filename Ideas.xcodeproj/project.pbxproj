@@ -16,6 +16,8 @@
 		86E3DD401E9D70FC008013E2 /* IdeasUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E3DD3F1E9D70FC008013E2 /* IdeasUITests.swift */; };
 		86E3DD4F1E9E826F008013E2 /* AttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E3DD4D1E9E826F008013E2 /* AttachmentCell.swift */; };
 		86E3DD501E9E826F008013E2 /* AttachmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86E3DD4E1E9E826F008013E2 /* AttachmentCell.xib */; };
+		86E3DD531E9E8C98008013E2 /* AddAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E3DD511E9E8C98008013E2 /* AddAttachmentViewController.swift */; };
+		86E3DD541E9E8C98008013E2 /* AddAttachmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86E3DD521E9E8C98008013E2 /* AddAttachmentViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		86E3DD411E9D70FC008013E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86E3DD4D1E9E826F008013E2 /* AttachmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentCell.swift; sourceTree = "<group>"; };
 		86E3DD4E1E9E826F008013E2 /* AttachmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttachmentCell.xib; sourceTree = "<group>"; };
+		86E3DD511E9E8C98008013E2 /* AddAttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAttachmentViewController.swift; sourceTree = "<group>"; };
+		86E3DD521E9E8C98008013E2 /* AddAttachmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAttachmentViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				86E3DD1F1E9D70FC008013E2 /* AppDelegate.swift */,
 				86E3DD211E9D70FC008013E2 /* Document.swift */,
 				86E3DD231E9D70FC008013E2 /* Document.xib */,
+				86E3DD511E9E8C98008013E2 /* AddAttachmentViewController.swift */,
+				86E3DD521E9E8C98008013E2 /* AddAttachmentViewController.xib */,
 				86E3DD4D1E9E826F008013E2 /* AttachmentCell.swift */,
 				86E3DD4E1E9E826F008013E2 /* AttachmentCell.xib */,
 				86E3DD261E9D70FC008013E2 /* Assets.xcassets */,
@@ -239,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86E3DD501E9E826F008013E2 /* AttachmentCell.xib in Resources */,
+				86E3DD541E9E8C98008013E2 /* AddAttachmentViewController.xib in Resources */,
 				86E3DD271E9D70FC008013E2 /* Assets.xcassets in Resources */,
 				86E3DD251E9D70FC008013E2 /* Document.xib in Resources */,
 				86E3DD2A1E9D70FC008013E2 /* MainMenu.xib in Resources */,
@@ -269,6 +276,7 @@
 				86E3DD4F1E9E826F008013E2 /* AttachmentCell.swift in Sources */,
 				86E3DD221E9D70FC008013E2 /* Document.swift in Sources */,
 				86E3DD201E9D70FC008013E2 /* AppDelegate.swift in Sources */,
+				86E3DD531E9E8C98008013E2 /* AddAttachmentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

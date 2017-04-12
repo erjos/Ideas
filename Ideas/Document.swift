@@ -78,13 +78,16 @@ extension FileWrapper {
         }
         
         // Ask the system if this file type conforms to the provided type
-        return UTTypeConformsTo(fileType, type)
+        return UTTypeConformsTo(fileType, aProtocol)
     }
 }
 
 class Document: NSDocument {
     
     @IBOutlet weak var attachmentsList: NSScrollView!
+    
+    @IBAction func addAttachment(_ sender: Any) {
+    }
     
     // Main text content
     var text : NSAttributedString = NSAttributedString()
