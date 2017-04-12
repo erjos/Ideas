@@ -48,15 +48,19 @@ func err(_ code: ErrorCode, _ userInfo:[NSObject:Any]? = nil)
 class Document: NSDocument {
 
     // Main text content
+    
     var text : NSAttributedString = NSAttributedString()
     
     var documentFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
     
+    //Prepares and returns a new file wrapper to the system, which then saves it to disk
     override func fileWrapper(ofType typeName: String) throws -> FileWrapper {
         
         let textRTFData = try self.text.data(from: NSRange(0..<self.text.length), documentAttributes: [NSDocumentTypeDocumentAttribute : NSRTFTextDocumentType])
         
         //If the current document file wrapper already contains a  text file, remove it and replace with new one
+        //I think that if the optional returns nil (aka nothings there) the conditonal binding returns false
+            // and the code doesn't execute- would be cool to talk about this and see if I understand correctly
         if let oldTextFileWrapper = self.documentFileWrapper.fileWrappers?[IdeaDocumentFileNames.TextFile.rawValue] {
             self.documentFileWrapper.removeFileWrapper(oldTextFileWrapper)
         }
@@ -66,6 +70,29 @@ class Document: NSDocument {
         
         //return the main documents file wrapper - what is saved on disk
         return self.documentFileWrapper
+    }
+    
+    //Loads document from the file wrapper
+    override func read(from fileWrapper: FileWrapper, ofType typeName: String) throws {
+        
+        //Ensure that we have additional file wrappers in this file wrapper
+        guard let fileWrappers = fileWrapper.fileWrappers else {
+            throw err(.CannotLoadFileWrappers)
+        }
+        
+        //Ensure that we can access the document text
+        guard let documentTextData = fileWrappers[IdeaDocumentFileNames.TextFile.rawValue]?.regularFileContents else {
+            throw err(.CannotLoadText)
+        }
+        
+        //Load the text data as RTF
+        guard let documentText = NSAttributedString(rtf: documentTextData, documentAttributes: nil) else {
+            throw err(.CannotLoadText)
+        }
+        
+        //Keep the text in memory
+        self.documentFileWrapper = fileWrapper
+        self.text = documentText
     }
     
     override init() {
