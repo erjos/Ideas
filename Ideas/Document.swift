@@ -45,10 +45,48 @@ func err(_ code: ErrorCode, _ userInfo:[NSObject:Any]? = nil)
         return NSError(domain: ErrorDomain, code : code.rawValue, userInfo: userInfo)
 }
 
-class Document: NSDocument {
-
-    // Main text content
+extension FileWrapper {
+    dynamic var fileExtension : String? {
+        return self.preferredFilename?
+        .components(separatedBy: ".").last
+    }
     
+    dynamic var thumbnailImage : NSImage {
+        
+        if let fileExtension = self.fileExtension{
+            return NSWorkspace.shared()
+            .icon(forFileType: fileExtension)
+        } else {
+            return NSWorkspace.shared().icon(forFileType: "")
+        }
+    }
+    
+    func conforms(to aProtocol: CFString) -> Bool {
+        
+        // Get the extension of this file
+        guard let fileExtension = self.fileExtension else {
+            
+            //If we can't get a file extension, assume it doesn't conform
+            return false
+        }
+    
+        // Get the file type of the attachment based on its extension
+        guard let fileType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as CFString, nil)?
+            .takeRetainedValue() else {
+                // If we can't figure out the file type from the extension, it also doesn't conform
+                return false
+        }
+        
+        // Ask the system if this file type conforms to the provided type
+        return UTTypeConformsTo(fileType, type)
+    }
+}
+
+class Document: NSDocument {
+    
+    @IBOutlet weak var attachmentsList: NSScrollView!
+    
+    // Main text content
     var text : NSAttributedString = NSAttributedString()
     
     var documentFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
