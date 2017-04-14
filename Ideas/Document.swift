@@ -119,9 +119,31 @@ extension Document : AddAttachmentDelegate {
     }
 }
 
+extension Document : NSCollectionViewDataSource {
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.attachedFiles?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        
+        // Get attachment that this cell should represent
+        let attachment = self.attachedFiles![indexPath.item]
+
+        // Get the cell itself
+        let item = collectionView.makeItem(withIdentifier: "AttachmentCell", for: indexPath) as! AttachmentCell
+        
+        // Display the image and file extension in the cell
+     //   item.imageView?.image = attachment.icon
+        item.attachmentImageView?.image = attachment.icon
+        //item.textField?.stringValue = attachment.fileExtension ?? ""
+        
+        return item
+    }
+}
+
 class Document: NSDocument {
     
-    @IBOutlet var attachmentsList: NSCollectionView!
+    @IBOutlet weak var attachmentsList: NSCollectionView!
     
     @IBAction func addAttachment(_ sender: NSButton) {
         

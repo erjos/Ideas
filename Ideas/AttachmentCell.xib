@@ -8,42 +8,33 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AttachmentCell" customModule="Ideas" customModuleProvider="target">
             <connections>
+                <outlet property="attachmentImageView" destination="PFF-xP-7aD" id="oV0-1T-zoc"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="287" height="287"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucL-M4-SQS">
-                    <rect key="frame" x="42" y="39" width="202" height="208"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="byd-dW-Fti"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PFF-xP-7aD">
+                    <rect key="frame" x="133" y="35" width="215" height="203"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" imageFrameStyle="grayBezel" id="2uZ-PV-LbH">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                                <color key="value" red="0.13173146989812995" green="0.93657967931937169" blue="0.28225100899810984" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageCell>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ycn-KC-yrr">
-                    <rect key="frame" x="125" y="8" width="37" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="oh2-bf-KIA">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
             </subviews>
-            <constraints>
-                <constraint firstItem="ucL-M4-SQS" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="2gq-0l-V7t"/>
-                <constraint firstItem="ucL-M4-SQS" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="40" id="DxI-MK-qIC"/>
-                <constraint firstItem="ucL-M4-SQS" firstAttribute="centerX" secondItem="Ycn-KC-yrr" secondAttribute="centerX" id="nEd-f3-1Of"/>
-                <constraint firstItem="ucL-M4-SQS" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="42" id="pKh-F8-GhI"/>
-                <constraint firstItem="ucL-M4-SQS" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="pkL-La-LEv"/>
-                <constraint firstItem="Ycn-KC-yrr" firstAttribute="top" secondItem="ucL-M4-SQS" secondAttribute="bottom" constant="14" id="wOT-Xg-Czy"/>
-            </constraints>
-            <point key="canvasLocation" x="102.5" y="176.5"/>
         </customView>
-        <collectionViewItem id="RCs-2e-0Yl" customClass="AttachmentCell" customModule="Ideas" customModuleProvider="target">
+        <collectionViewItem title="AttachmentCell" nibName="AttachmentCell" id="DnF-cs-3SK" customClass="AttachmentCell" customModule="Ideas" customModuleProvider="target">
             <connections>
-                <outlet property="imageView" destination="ucL-M4-SQS" id="UHX-8w-KKw"/>
-                <outlet property="view" destination="Hz6-mo-xeY" id="mN2-fK-r43"/>
+                <outlet property="imageView" destination="PFF-xP-7aD" id="WVd-Wk-I6d"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0JR-7Q-vaQ"/>
             </connections>
         </collectionViewItem>
     </objects>
