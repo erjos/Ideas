@@ -66,14 +66,14 @@
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" scrollDirection="horizontal" id="uvj-1Z-Ixt">
                                         <size key="itemSize" width="50" height="50"/>
                                     </collectionViewFlowLayout>
-                                    <color key="primaryBackgroundColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="primaryBackgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-2" id="BDM-Nc-SZM"/>
                                         <outlet property="delegate" destination="-2" id="UcB-Ey-Lah"/>
                                     </connections>
                                 </collectionView>
                             </subviews>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="uI7-wx-VLl">
                             <rect key="frame" x="1" y="144" width="233" height="15"/>

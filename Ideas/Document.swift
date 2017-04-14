@@ -19,6 +19,7 @@ enum IdeaDocumentFileNames : String {
 @objc protocol AttachmentCellDelegate : NSObjectProtocol {
     func openSelectedAttachment(_ collectionViewItem: NSCollectionViewItem)
 }
+
 extension Document : AttachmentCellDelegate{
     func openSelectedAttachment(_ collectionViewItem: NSCollectionViewItem) {
         // Get the index of this item or bail out
@@ -120,7 +121,7 @@ extension Document : NSCollectionViewDataSource {
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         
         // Get the attachment that this cell should represent
-        let attachment = self.attachedFiles![indexPath.item]
+        let attachment = self.attachedFiles![(indexPath as NSIndexPath).item]
         
         // Get the cell itself
         let item = collectionView
@@ -130,6 +131,9 @@ extension Document : NSCollectionViewDataSource {
         item.imageView?.image = attachment.thumbnailImage
         
         item.textField?.stringValue = attachment.fileExtension ?? ""
+        
+        //make this cell use itself as it's delegate
+        item.delegate = self
         
         return item
     }
