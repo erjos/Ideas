@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MapKit
 
 //Names of files and directories in the package
 enum IdeaDocumentFileNames : String {
@@ -34,13 +35,39 @@ extension Document : AttachmentCellDelegate{
         
         // First ensure that the document is saved
         self.autosave(withImplicitCancellability: false, completionHandler: { (error) -> Void in
-            var url = self.fileURL
-            url = url?.appendingPathComponent(IdeaDocumentFileNames.AttachmentsDirectory.rawValue, isDirectory: true)
             
-            url = url?.appendingPathComponent(attachment.preferredFilename!)
+            // if the attachment is JSON and we can retrieve
+            if attachment.conforms(to: kUTTypeJSON),
+                let data = attachment.regularFileContents,
+            let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? NSDictionary {
+                
+                //if that entry contains lat and long entries
+                if let lat = json?["lat"] as? CLLocationDegrees,
+                    let lon = json?["long"] as? CLLocationDegrees{
+                    
+                    //build a coordinate from them
+                    let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                    
+                    //build a placemark with that coordinate
+                    let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+                    
+                    //build map item from placemark
+                    let mapItem = MKMapItem(placemark: placemark)
+                    
+                    //open the maps item in the maps app
+                    mapItem.openInMaps(launchOptions: nil)
+                } else {
+                
+                
+                    var url = self.fileURL
+                    url = url?.appendingPathComponent(IdeaDocumentFileNames.AttachmentsDirectory.rawValue, isDirectory: true)
             
-            if let path = url?.path {
-                NSWorkspace.shared().openFile(path, withApplication: nil, andDeactivate: true)
+                    url = url?.appendingPathComponent(attachment.preferredFilename!)
+            
+                    if let path = url?.path {
+                        NSWorkspace.shared().openFile(path, withApplication: nil, andDeactivate: true)
+                    }
+                }
             }
         })
     }
@@ -129,9 +156,6 @@ extension Document : NSCollectionViewDataSource {
         
         // Display the image and file exgtension in the ecell
         //item.imageView?.image = attachment.thumbnailImage
-        
-        
-        item.imageWell?.image = attachment.thumbnailImage
         
         item.textField?.stringValue = attachment.fileExtension ?? ""
         
