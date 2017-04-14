@@ -16,6 +16,35 @@ enum IdeaDocumentFileNames : String {
     
 }
 
+@objc protocol AttachmentCellDelegate : NSObjectProtocol {
+    func openSelectedAttachment(_ collectionViewItem: NSCollectionViewItem)
+}
+extension Document : AttachmentCellDelegate{
+    func openSelectedAttachment(_ collectionViewItem: NSCollectionViewItem) {
+        // Get the index of this item or bail out
+        guard let selectedIndex = (self.attachmentsList.indexPath(for: collectionViewItem) as IndexPath?)?.item else{
+            return
+        }
+        
+        // Get the selected Attachment or bail out
+        guard let attachment = self.attachedFiles?[selectedIndex] else {
+            return
+        }
+        
+        // First ensure that the document is saved
+        self.autosave(withImplicitCancellability: false, completionHandler: { (error) -> Void in
+            var url = self.fileURL
+            url = url?.appendingPathComponent(IdeaDocumentFileNames.AttachmentsDirectory.rawValue, isDirectory: true)
+            
+            url = url?.appendingPathComponent(attachment.preferredFilename!)
+            
+            if let path = url?.path {
+                NSWorkspace.shared().openFile(path, withApplication: nil, andDeactivate: true)
+            }
+        })
+    }
+}
+
 enum ErrorCode : Int {
     /// Couldn't find document
     case CannotAccessDocument
