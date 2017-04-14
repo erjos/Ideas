@@ -82,6 +82,30 @@ extension FileWrapper {
     }
 }
 
+extension Document : NSCollectionViewDataSource {
+    
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.attachedFiles?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        
+        // Get the attachment that this cell should represent
+        let attachment = self.attachedFiles![indexPath.item]
+        
+        // Get the cell itself
+        let item = collectionView
+        .makeItem(withIdentifier: "AttachmentCell", for: indexPath) as! AttachmentCell
+        
+        // Display the image and file exgtension in the ecell
+        item.imageView?.image = attachment.thumbnailImage
+        
+        item.textField?.stringValue = attachment.fileExtension ?? ""
+        
+        return item
+    }
+}
+
 extension Document : AddAttachmentDelegate {
     func addFile() {
         let panel = NSOpenPanel()

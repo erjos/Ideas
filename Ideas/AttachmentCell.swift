@@ -13,6 +13,8 @@ class AttachmentCell: NSCollectionViewItem {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
+        collectionView.reloadData()
     }
     
 }
