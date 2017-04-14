@@ -21,6 +21,35 @@ enum IdeaDocumentFileNames : String {
     func openSelectedAttachment(_ collectionViewItem: NSCollectionViewItem)
 }
 
+extension Document: NSCollectionViewDelegate {
+    func collectionView(_ collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath: AutoreleasingUnsafeMutablePointer<IndexPath>, dropOperation: UnsafeMutablePointer<NSCollectionViewDropOperation>) -> NSDragOperation {
+        
+        //indicate to the user that if they release the mouse button it will copy what they're dragging
+        return NSDragOperation.copy
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, acceptDrop draggingInfo: NSDraggingInfo, indexPath: IndexPath, dropOperation: NSCollectionViewDropOperation) -> Bool {
+        
+        // get the pasteboard that contains the info the user dropped
+        let pasteboard = draggingInfo.draggingPasteboard()
+        
+        // if the pasteboard contains a URL that we can access
+        if pasteboard.types?.contains(NSURLPboardType) == true, let url = NSURL(from: pasteboard) as? URL{
+            //then attempt to add as an attachment
+            do{
+                //add it to the document
+                try self.addAttachmentAtURL(url: url)
+                attachmentsList.reloadData()
+                return true
+            } catch let error as NSError{
+                self.presentError(error)
+                return false
+            }
+        }
+        return false
+    }
+}
+
 extension Document : AttachmentCellDelegate{
     func openSelectedAttachment(_ collectionViewItem: NSCollectionViewItem) {
         // Get the index of this item or bail out
@@ -280,6 +309,10 @@ class Document: NSDocument {
         } else {
             return nil
         }
+    }
+    
+    override func windowControllerDidLoadNib(_ windowController: NSWindowController) {
+        self.attachmentsList.register(forDraggedTypes: [NSURLPboardType])
     }
     
     //Prepares and returns a new file wrapper to the system, which then saves it to disk
