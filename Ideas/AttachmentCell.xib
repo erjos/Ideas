@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="513" height="310"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ycn-KC-yrr">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ycn-KC-yrr">
                     <rect key="frame" x="238" y="20" width="37" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="oh2-bf-KIA">
                         <font key="font" metaFont="system"/>
@@ -25,26 +25,20 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucL-M4-SQS">
-                    <rect key="frame" x="133" y="42" width="247" height="225"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="247" id="Z0D-PL-y8G"/>
-                    </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="byd-dW-Fti"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4i-De-gFe">
+                    <rect key="frame" x="232" y="131" width="48" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="PHW-7m-VHZ"/>
                 </imageView>
             </subviews>
             <constraints>
-                <constraint firstItem="ucL-M4-SQS" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="IgK-na-8Ha"/>
-                <constraint firstItem="ucL-M4-SQS" firstAttribute="centerX" secondItem="Ycn-KC-yrr" secondAttribute="centerX" id="QTb-LC-vFj"/>
                 <constraint firstAttribute="bottom" secondItem="Ycn-KC-yrr" secondAttribute="bottom" constant="20" symbolic="YES" id="dwO-UC-DBh"/>
-                <constraint firstItem="Ycn-KC-yrr" firstAttribute="top" secondItem="ucL-M4-SQS" secondAttribute="bottom" constant="5" id="psi-Cl-WlP"/>
-                <constraint firstItem="ucL-M4-SQS" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="y6k-JL-Yc5"/>
             </constraints>
             <point key="canvasLocation" x="52.5" y="128"/>
         </customView>
         <collectionViewItem id="RCs-2e-0Yl" userLabel="AttachmentCell" customClass="AttachmentCell" customModule="Ideas" customModuleProvider="target">
             <connections>
-                <outlet property="imageView" destination="ucL-M4-SQS" id="Zjc-St-tW7"/>
+                <outlet property="imageView" destination="g4i-De-gFe" id="JCP-O1-9SM"/>
                 <outlet property="textField" destination="Ycn-KC-yrr" id="Ivc-mj-Lvz"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="gbt-HE-9Me"/>
             </connections>
