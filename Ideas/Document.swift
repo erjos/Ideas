@@ -128,7 +128,10 @@ extension Document : NSCollectionViewDataSource {
         .makeItem(withIdentifier: "AttachmentCell", for: indexPath) as! AttachmentCell
         
         // Display the image and file exgtension in the ecell
-        item.imageView?.image = attachment.thumbnailImage
+        //item.imageView?.image = attachment.thumbnailImage
+        
+        
+        item.imageWell?.image = attachment.thumbnailImage
         
         item.textField?.stringValue = attachment.fileExtension ?? ""
         

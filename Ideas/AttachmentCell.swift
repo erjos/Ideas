@@ -10,6 +10,7 @@ import Cocoa
 
 class AttachmentCell: NSCollectionViewItem {
     
+    @IBOutlet var imageWell: NSImageView!
     //property that keeps a reference to an object that conforms to the delegate
     weak var delegate : AttachmentCellDelegate?
     
