@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ideas/Document.swift"
-            timestampString = "513904118.018244"
+            timestampString = "513979780.99362"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "collectionView(_:itemForRepresentedObjectAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,157 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ideas/Document.swift"
-            timestampString = "513904118.018244"
+            timestampString = "513979780.99362"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "collectionView(_:itemForRepresentedObjectAt:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ideas/Document.swift"
-            timestampString = "513904282.597289"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "collectionView(_:acceptDrop:indexPath:dropOperation:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ideas/Document.swift"
-            timestampString = "513904283.940612"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "collectionView(_:acceptDrop:indexPath:dropOperation:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ideas/Document.swift"
-            timestampString = "513904287.308882"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "collectionView(_:acceptDrop:indexPath:dropOperation:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ideas/Document.swift"
-            timestampString = "513904288.336623"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "collectionView(_:acceptDrop:indexPath:dropOperation:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ideas.Document.collectionView (__ObjC.NSCollectionView, acceptDrop : __ObjC.NSDraggingInfo, indexPath : Foundation.IndexPath, dropOperation : __C.NSCollectionViewDropOperation) -&gt; Swift.Bool"
-                  moduleName = "Ideas"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jos668/Documents/Xcode/Ideas/Ideas/Document.swift"
-                  timestampString = "513904288.545123"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ideas.Document.collectionView (__ObjC.NSCollectionView, acceptDrop : __ObjC.NSDraggingInfo, indexPath : Foundation.IndexPath, dropOperation : __C.NSCollectionViewDropOperation) -&gt; Swift.Bool"
-                  moduleName = "Ideas"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jos668/Documents/Xcode/Ideas/Ideas/Document.swift"
-                  timestampString = "513904288.546559"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "694">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ideas/Document.swift"
-            timestampString = "513904289.297841"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "collectionView(_:acceptDrop:indexPath:dropOperation:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ideas.Document.collectionView (__ObjC.NSCollectionView, acceptDrop : __ObjC.NSDraggingInfo, indexPath : Foundation.IndexPath, dropOperation : __C.NSCollectionViewDropOperation) -&gt; Swift.Bool"
-                  moduleName = "Ideas"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jos668/Documents/Xcode/Ideas/Ideas/Document.swift"
-                  timestampString = "513904438.903947"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Ideas.Document.collectionView (__ObjC.NSCollectionView, acceptDrop : __ObjC.NSDraggingInfo, indexPath : Foundation.IndexPath, dropOperation : __C.NSCollectionViewDropOperation) -&gt; Swift.Bool"
-                  moduleName = "Ideas"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jos668/Documents/Xcode/Ideas/Ideas/Document.swift"
-                  timestampString = "513904438.905174"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "694">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
