@@ -22,7 +22,10 @@ enum IdeaDocumentFileNames : String {
 }
 
 extension Document: NSCollectionViewDelegate {
-    func collectionView(_ collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath: AutoreleasingUnsafeMutablePointer<IndexPath>, dropOperation: UnsafeMutablePointer<NSCollectionViewDropOperation>) -> NSDragOperation {
+    
+    //This function was really hard to write, it had a bunch of possibilities, but the exact paramters were easily mixed up,
+    //what's up with that bullshit?
+    func collectionView(_ collectionView: NSCollectionView, validateDrop draggingInfo: NSDraggingInfo, proposedIndexPath: AutoreleasingUnsafeMutablePointer<NSIndexPath?>, dropOperation proposedDropOperation: UnsafeMutablePointer<NSCollectionViewDropOperation>) -> NSDragOperation {
         
         //indicate to the user that if they release the mouse button it will copy what they're dragging
         return NSDragOperation.copy
