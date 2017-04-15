@@ -54,7 +54,9 @@ extension Document: NSCollectionViewDelegate {
 }
 
 extension Document : AttachmentCellDelegate{
+    
     func openSelectedAttachment(_ collectionViewItem: NSCollectionViewItem) {
+        
         // Get the index of this item or bail out
         guard let selectedIndex = (self.attachmentsList.indexPath(for: collectionViewItem) as IndexPath?)?.item else{
             return
@@ -69,14 +71,11 @@ extension Document : AttachmentCellDelegate{
         self.autosave(withImplicitCancellability: false, completionHandler: { (error) -> Void in
             
             // if the attachment is JSON and we can retrieve
-            if attachment.conforms(to: kUTTypeJSON),
-                let data = attachment.regularFileContents,
-            let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? NSDictionary {
+            if attachment.conforms(to: kUTTypeJSON), let data = attachment.regularFileContents,
+                let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as? NSDictionary {
                 
                 //if that entry contains lat and long entries
-                if let lat = json?["lat"] as? CLLocationDegrees,
-                    let lon = json?["long"] as? CLLocationDegrees{
-                    
+                if let lat = json?["lat"] as? CLLocationDegrees, let lon = json?["long"] as? CLLocationDegrees {
                     //build a coordinate from them
                     let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
                     
@@ -88,17 +87,15 @@ extension Document : AttachmentCellDelegate{
                     
                     //open the maps item in the maps app
                     mapItem.openInMaps(launchOptions: nil)
-                } else {
+                }
+            } else {
+                var url = self.fileURL
+                url = url?.appendingPathComponent(IdeaDocumentFileNames.AttachmentsDirectory.rawValue, isDirectory: true)
                 
+                url = url?.appendingPathComponent(attachment.preferredFilename!)
                 
-                    var url = self.fileURL
-                    url = url?.appendingPathComponent(IdeaDocumentFileNames.AttachmentsDirectory.rawValue, isDirectory: true)
-            
-                    url = url?.appendingPathComponent(attachment.preferredFilename!)
-            
-                    if let path = url?.path {
-                        NSWorkspace.shared().openFile(path, withApplication: nil, andDeactivate: true)
-                    }
+                if let path = url?.path{
+                    NSWorkspace.shared().openFile(path, withApplication: nil, andDeactivate: true)
                 }
             }
         })
@@ -137,14 +134,14 @@ func err(_ code: ErrorCode, _ userInfo:[NSObject:Any]? = nil)
 extension FileWrapper {
     dynamic var fileExtension : String? {
         return self.preferredFilename?
-        .components(separatedBy: ".").last
+            .components(separatedBy: ".").last
     }
     
     dynamic var thumbnailImage : NSImage {
         
         if let fileExtension = self.fileExtension{
             return NSWorkspace.shared()
-            .icon(forFileType: fileExtension)
+                .icon(forFileType: fileExtension)
         } else {
             return NSWorkspace.shared().icon(forFileType: "")
         }
@@ -158,7 +155,7 @@ extension FileWrapper {
             //If we can't get a file extension, assume it doesn't conform
             return false
         }
-    
+        
         // Get the file type of the attachment based on its extension
         guard let fileType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as CFString, nil)?
             .takeRetainedValue() else {
@@ -184,7 +181,7 @@ extension Document : NSCollectionViewDataSource {
         
         // Get the cell itself
         let item = collectionView
-        .makeItem(withIdentifier: "AttachmentCell", for: indexPath) as! AttachmentCell
+            .makeItem(withIdentifier: "AttachmentCell", for: indexPath) as! AttachmentCell
         
         // Display the image and file exgtension in the ecell
         //item.imageView?.image = attachment.thumbnailImage
@@ -325,7 +322,7 @@ class Document: NSDocument {
         
         //If the current document file wrapper already contains a  text file, remove it and replace with new one
         //I think that if the optional returns nil (aka nothings there) the conditonal binding returns false
-            // and the code doesn't execute- would be cool to talk about this and see if I understand correctly
+        // and the code doesn't execute- would be cool to talk about this and see if I understand correctly
         if let oldTextFileWrapper = self.documentFileWrapper.fileWrappers?[IdeaDocumentFileNames.TextFile.rawValue] {
             self.documentFileWrapper.removeFileWrapper(oldTextFileWrapper)
         }
@@ -364,30 +361,30 @@ class Document: NSDocument {
         super.init()
         // Add your subclass-specific initialization here.
     }
-
+    
     override class func autosavesInPlace() -> Bool {
         return true
     }
-
+    
     override var windowNibName: String? {
         // Returns the nib file name of the document
         // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this property and override -makeWindowControllers instead.
         return "Document"
     }
-
+    
     override func data(ofType typeName: String) throws -> Data {
         // Insert code here to write your document to data of the specified type. If outError != nil, ensure that you create and set an appropriate error when returning nil.
         // You can also choose to override fileWrapperOfType:error:, writeToURL:ofType:error:, or writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
         throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
-
+    
     override func read(from data: Data, ofType typeName: String) throws {
         // Insert code here to read your document from the given data of the specified type. If outError != nil, ensure that you create and set an appropriate error when returning false.
         // You can also choose to override readFromFileWrapper:ofType:error: or readFromURL:ofType:error: instead.
         // If you override either of these, you should also override -isEntireFileLoaded to return false if the contents are lazily loaded.
         throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
-
-
+    
+    
 }
 
