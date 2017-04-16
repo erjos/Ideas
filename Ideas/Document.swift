@@ -15,6 +15,11 @@ enum IdeaDocumentFileNames : String {
     
     case AttachmentsDirectory = "Attachments"
     
+    case QuickLookDirectory = "QuickLook"
+    
+    case QuickLookTextFile = "Preview.rtf"
+    
+    case QuickLookThumbnail = "Thumbnail.png"
 }
 
 @objc protocol AttachmentCellDelegate : NSObjectProtocol {
@@ -282,6 +287,36 @@ class Document: NSDocument {
         }
         
         return attachmentsDirectoryWrapper
+    }
+    
+    func iconImageDataWithSize(_ size: CGSize) -> Data? {
+        let image = NSImage(size: size)
+        image.lockFocus()
+        let entireImageRect = CGRect(origin: CGPoint.zero, size: size)
+        
+        //Fill background with white
+        let backgroundRect = NSBezierPath(rect: entireImageRect)
+        NSColor.white.setFill()
+        backgroundRect.fill()
+        
+        if (self.attachedFiles?.count)! >= 1 {
+            
+            //Render our text and the first attachment
+            let attachmentImage = self.attachedFiles?[0].thumbnailImage
+            let result = entireImageRect.divided(atDistance: entireImageRect.size.height / 2.0, from: CGRectEdge.minYEdge)
+            self.text.draw(in: result.slice)
+            attachmentImage?.draw(in: result.remainder)
+        } else {
+            
+            //Just render the text
+            self.text.draw(in: entireImageRect)
+        }
+        
+        let bitmapRepresentation = NSBitmapImageRep(focusedViewRect: entireImageRect)
+        image.unlockFocus()
+        
+        //Convert it to a PNG
+        return bitmapRepresentation?.representation(using: .PNG, properties: [:])
     }
     
     //Adds an attachment to the attachment directory
