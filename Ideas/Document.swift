@@ -290,6 +290,7 @@ class Document: NSDocument {
     }
     
     func iconImageDataWithSize(_ size: CGSize) -> Data? {
+        
         let image = NSImage(size: size)
         image.lockFocus()
         let entireImageRect = CGRect(origin: CGPoint.zero, size: size)
@@ -356,11 +357,27 @@ class Document: NSDocument {
         let textRTFData = try self.text.data(from: NSRange(0..<self.text.length), documentAttributes: [NSDocumentTypeDocumentAttribute : NSRTFTextDocumentType])
         
         //If the current document file wrapper already contains a  text file, remove it and replace with new one
-        //I think that if the optional returns nil (aka nothings there) the conditonal binding returns false
-        // and the code doesn't execute- would be cool to talk about this and see if I understand correctly
-        if let oldTextFileWrapper = self.documentFileWrapper.fileWrappers?[IdeaDocumentFileNames.TextFile.rawValue] {
+            if let oldTextFileWrapper = self.documentFileWrapper.fileWrappers?[IdeaDocumentFileNames.TextFile.rawValue] {
             self.documentFileWrapper.removeFileWrapper(oldTextFileWrapper)
         }
+        
+        //Create QuickLook Folder
+        let thumbnailImageData = self.iconImageDataWithSize(CGSize(width: 512, height: 512))!
+        let thumbnailWrapper = FileWrapper(regularFileWithContents: thumbnailImageData)
+        
+        let quicklookPreview = FileWrapper(regularFileWithContents: textRTFData)
+        
+        let quicklookFolderFileWrapper = FileWrapper(directoryWithFileWrappers: [IdeaDocumentFileNames.QuickLookTextFile.rawValue: quicklookPreview, IdeaDocumentFileNames.QuickLookThumbnail.rawValue: thumbnailWrapper])
+        
+        quicklookFolderFileWrapper.preferredFilename = IdeaDocumentFileNames.QuickLookDirectory.rawValue
+        
+        // Remove the old quicklook folder if it existed
+        if let oldQuicklookPreview = self.documentFileWrapper.fileWrappers?[IdeaDocumentFileNames.QuickLookDirectory.rawValue]{
+            self.documentFileWrapper.removeFileWrapper(oldQuicklookPreview)
+        }
+        
+        // Add the new quicklook folder
+        self.documentFileWrapper.addFileWrapper(quicklookFolderFileWrapper)
         
         //Save the text data into the file
         self.documentFileWrapper.addRegularFile(withContents: textRTFData, preferredFilename: IdeaDocumentFileNames.TextFile.rawValue)
